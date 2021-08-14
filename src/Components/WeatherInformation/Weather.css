@@ -1,0 +1,21 @@
+.weatherContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+@media (min-width: 960px) {
+  .weatherContainer {
+    justify-content: flex-end;
+    text-align: justify;
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .weatherContainer {
+    flex-direction: row;
+  }
+}

@@ -1,0 +1,9 @@
+.App {
+  background: url("./Assets/img/background.jpg") center center fixed;
+  width: 100%;
+  height: 100vh;
+}
+
+p {
+  cursor: default;
+}

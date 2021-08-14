@@ -1,0 +1,55 @@
+.header {
+  padding: 2.8%;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media (min-width: 960px) {
+  .headerContainer {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .buttonContainer {
+    margin-top: 0;
+  }
+
+  .input {
+    width: 300px;
+  }
+}
+
+.searchContainer {
+  display: flex;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1%;
+}
+
+.input {
+  width: 100%;
+  background-color: rgba(154, 142, 137, 0.35);
+  border-radius: 7px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: none;
+}
+
+.button {
+  background-color: rgba(150, 105, 105, 0.35);
+}
+
+.button:focus {
+  background-color: rgba(107, 101, 101, 0.35);
+}
+
+.button:hover {
+  background-color: rgba(198, 181, 181, 0.35);
+}

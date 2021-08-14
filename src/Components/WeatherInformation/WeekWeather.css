@@ -1,0 +1,52 @@
+.forecastContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 1rem;
+  font-family: fontRegular;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-top: 3%;
+}
+
+@media (min-width: 960px) {
+  .forecastContainer {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .weatherIcon {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (min-width: 600px) {
+  .forecastContainer {
+    font-size: 1.9rem;
+  }
+
+  .tempCont {
+    font-size: 2.3rem;
+  }
+
+  .weatherIcon {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+.tempCont {
+  display: flex;
+  justify-content: center;
+  font-size: 1.7rem;
+}
+
+.tempData {
+  text-align: center;
+}
+
+.weatherIcon {
+  width: 70px;
+  height: 70px;
+}
