@@ -1,7 +1,11 @@
 .App {
-  background: url("./Assets/img/background.jpg") center center fixed;
+  --bg-image: url("./Assets/img/background.jpg");
+
+  background: var(--bg-image) fixed;
   width: 100%;
   height: 100vh;
+  background-size: cover;
+  background-position: center;
 }
 
 p {

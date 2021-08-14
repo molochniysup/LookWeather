@@ -1,5 +1,5 @@
-import React from 'react';
-import * as countryList from 'country-list';
+import React, {useEffect, useState} from 'react'
+import countryList from 'country-list';
 import "./TodayWeatherInformaion.css";
 
 const ITEM = 0;
@@ -13,8 +13,10 @@ export const getLocalTime = (tz) => {
   return new Date(Date.now() + tz * MILLISECONDS);
 };
 
-const TodayWeatherInformation = (todayWeather) => {
-  const getCurrentTime = getLocalTime(todayWeather.todayWeather.timezone);
+const TodayWeatherInformation = ({ todayWeather }) => {
+  const { timezone, name, sys: { country }, main: { temp, feels_like, humidity }, weather, wind: { speed } } = todayWeather
+
+  const getCurrentTime = getLocalTime(timezone);
   const localDay = getCurrentTime.getUTCDay();
   const localDate = getCurrentTime.getUTCDate();
   const localMonth = getCurrentTime.getMonth();
@@ -22,9 +24,9 @@ const TodayWeatherInformation = (todayWeather) => {
   const localHours = getCurrentTime.getUTCHours();
   const localMinutes = getCurrentTime.getUTCMinutes();
   const localSeconds = getCurrentTime.getUTCSeconds();
-  const [seconds, setSeconds] = React.useState(localSeconds);
-console.log(1234);
-  React.useEffect(() => {
+  const [seconds, setSeconds] = useState(localSeconds);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setSeconds(seconds + 1);
     }, 1000);
@@ -32,28 +34,26 @@ console.log(1234);
     return () => clearInterval(interval);
   }, [seconds]);
 
-  const getFormatTime = (time) => {
-    return time < 10 ? `0${time}` : time;
-  };
+  const getFormatTime = (time) => time < 10 ? `0${time}` : time;
 
   return (
     <div className="container container">
       <p
-        className="city">{todayWeather.todayWeather.name}, {countryList.getName(todayWeather.todayWeather.sys.country)}
+        className="city">{name}, {countryList.getName(country)}
       </p>
       <p
         className="date">{DAYS[localDay]} {localDate} {MONTH[localMonth]} {localYear} {getFormatTime(localHours)}:{getFormatTime(localMinutes)}:{getFormatTime(localSeconds)}</p>
       <div className="dataTemp">
         <div className="tempContainer">
-          <p className="temp">{Math.floor(todayWeather.todayWeather.main.temp - 273)}°</p>
+          <p className="temp">{Math.floor(temp - 273)}°</p>
           <img className="tempIcon"
-               src={`./../../../../weather-icons/${todayWeather.todayWeather.weather[ITEM].icon}.svg`} alt="" />
+               src={`./../../../../weather-icons/${weather[ITEM].icon}.svg`} alt="" />
           <div className="overcast">
             <p className="overcastTemp">overcast</p>
             <p className="overcastTemp">feels
-              like: {Math.floor(todayWeather.todayWeather.main.feels_like - 273)}°</p>
-            <p className="overcastTemp">wind: {todayWeather.todayWeather.wind.speed} m/s</p>
-            <p className="overcastTemp">humidity: {todayWeather.todayWeather.main.humidity}%</p>
+              like: {Math.floor(feels_like - 273)}°</p>
+            <p className="overcastTemp">wind: {speed} m/s</p>
+            <p className="overcastTemp">humidity: {humidity}%</p>
           </div>
         </div>
       </div>
