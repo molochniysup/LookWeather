@@ -6,18 +6,19 @@ import Header from './Components/Header/Header'
 import './App.css'
 import Preloader from './Components/Preloader/Preloader'
 import Currency from './Components/Currency/Currency'
-import {format} from 'date-fns'
 
 import defaultBackgroundImage from './Assets/img/background.jpg'
-import morningClouds from './Assets/img/morningClouds.gif'
+
+const MILLISECONDS = 1000;
+
+export const getLocalTime = (tz) => {
+  return new Date(Date.now() + tz * MILLISECONDS);
+};
 
 const App = () => {
   const [todayWeather, setTodayWeather] = useState()
   const [weekWeather, setWeekWeather] = useState()
   const [isLoading, setIsLoading] = useState(false)
-  const [backgroundImage, setBackgroundImage] = useState(defaultBackgroundImage)
-
-  console.log(backgroundImage)
 
   useEffect(() => {
     const load = async () => {
@@ -34,19 +35,6 @@ const App = () => {
     load()
   }, [])
 
-  useEffect(() => {
-    if (format(new Date(), 'HH') > '06') {
-      if (todayWeather?.weather[0]?.main === 'Clouds') {
-        console.log('Clouds')
-        setBackgroundImage(morningClouds)
-      }
-    }
-  }, [todayWeather])
-
-  console.log(backgroundImage)
-
-  console.log(todayWeather)
-
   const search = useCallback(async (city) => {
     const todayWeather = await createReq(getUrlWeatherByCity(city), setIsLoading(true))
 
@@ -60,13 +48,10 @@ const App = () => {
     setIsLoading(false)
     setTodayWeather(todayWeather)
     setWeekWeather(weekWeather)
-
   }, [setTodayWeather, setWeekWeather, setIsLoading])
 
   return (
-    <div className="App" style={{
-      '--bg-image': `url(${backgroundImage})`
-    }}>
+    <div className="App" >
       {isLoading && <Preloader/>}
       <Header search={search}/>
       {todayWeather && weekWeather && <Weather todayWeather={todayWeather} weekWeather={weekWeather}/>}

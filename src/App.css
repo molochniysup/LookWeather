@@ -1,7 +1,5 @@
 .App {
-  --bg-image: url("./Assets/img/background.jpg");
-
-  background: var(--bg-image) fixed;
+  background: url("./Assets/img/background.jpg") fixed;
   width: 100%;
   height: 100vh;
   background-size: cover;

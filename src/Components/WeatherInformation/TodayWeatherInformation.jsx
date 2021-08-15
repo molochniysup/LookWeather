@@ -1,17 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import countryList from 'country-list';
 import "./TodayWeatherInformaion.css";
+import {getLocalTime} from '../../App'
 
 const ITEM = 0;
-const MILLISECONDS = 1000;
 const MONTH = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December',
 ];
 export const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-export const getLocalTime = (tz) => {
-  return new Date(Date.now() + tz * MILLISECONDS);
-};
 
 const TodayWeatherInformation = ({ todayWeather }) => {
   const { timezone, name, sys: { country }, main: { temp, feels_like, humidity }, weather, wind: { speed } } = todayWeather
